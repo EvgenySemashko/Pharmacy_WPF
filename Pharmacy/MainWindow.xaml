@@ -1,0 +1,201 @@
+﻿<Window x:Class="Pharmacy.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Pharmacy"
+        xmlns:rules="clr-namespace:Pharmacy"
+        mc:Ignorable="d"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}"
+     WindowStartupLocation="CenterScreen"
+     MouseLeftButtonDown="dragMe"
+     Title="Log in window" Height="390" Width="760" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize">
+    <materialDesign:DialogHost DialogOpened="openLB" DialogClosing="closingLB">
+        <materialDesign:DialogHost.DialogContent>
+            <Grid Margin="10">
+                <Grid.Resources>
+                    <Style x:Key="setVisibilityBasedLogin" TargetType="StackPanel">
+                        <Setter Property="Visibility" Value="Visible"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=IsLogedIn, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window},
+                                    UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <ProgressBar Margin="10" Style="{StaticResource MaterialDesignCircularProgressBar}" IsIndeterminate="True" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Style="{StaticResource MaterialDesignRaisedButton}" Content="Cancel" Grid.Row="2" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Center"/>
+                <TextBlock Margin="10" Text="Logining up ..." Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+        </materialDesign:DialogHost.DialogContent>
+
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="GridFirst">
+            <Grid.Resources>
+                <Style x:Key="setVisibilityBasedLogin" TargetType="StackPanel">
+                    <Setter Property="Visibility" Value="Visible"></Setter>
+                </Style>
+            </Grid.Resources>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <materialDesign:TransitioningContent  Grid.Column="1"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Stretch">
+                <materialDesign:TransitioningContent.OpeningEffects>
+                    <materialDesign:TransitionEffect Kind="SlideInFromRight" Duration="0:0:1"></materialDesign:TransitionEffect>
+                </materialDesign:TransitioningContent.OpeningEffects>
+                <materialDesign:Card>
+                    <Image x:Name="imgForTrans" Source="medical-5459633_1280.png" StretchDirection="Both" Stretch="UniformToFill" HorizontalAlignment="Right" Width="380"/>
+                </materialDesign:Card>
+            </materialDesign:TransitioningContent>
+            <Grid Grid.Column="0" VerticalAlignment="Center" Height="228" Margin="0,77,0,85">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <materialDesign:TransitioningContent 
+                    Grid.Row="0"
+                    FontSize="20"
+                    HorizontalAlignment="Center" Margin="0,-42,36,0" 
+                    VerticalAlignment="Top">
+                    <materialDesign:TransitioningContent.OpeningEffects>
+                        <materialDesign:TransitionEffect Kind="ExpandIn" Duration="0:0:1"></materialDesign:TransitionEffect>
+                    </materialDesign:TransitioningContent.OpeningEffects>
+
+                </materialDesign:TransitioningContent>
+
+
+                <materialDesign:TransitioningContent Grid.Row="0" Margin="80,20,0,0" HorizontalAlignment="Left">
+                    <materialDesign:TransitioningContent.OpeningEffects>
+                        <materialDesign:TransitionEffect Kind="SlideInFromLeft" Duration="0:0:1"></materialDesign:TransitionEffect>
+                    </materialDesign:TransitioningContent.OpeningEffects>
+
+                    <StackPanel 
+                Style="{StaticResource setVisibilityBasedLogin}"
+                Orientation="Horizontal" >
+                        <materialDesign:PackIcon Kind="Account" Foreground="{Binding BorderBrush, ElementName=NameTextBox}" Margin="0,35,10,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBox
+                    x:Name="NameTextBox"
+                    materialDesign:HintAssist.Hint="Username"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Width="140" Margin="0,16,0,-2"
+                    >
+                            <Binding Path="Username" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <rules:NotEmptyValidationRule ValidatesOnTargetUpdated="False"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                    </StackPanel>
+                </materialDesign:TransitioningContent>
+
+                <materialDesign:TransitioningContent  Margin="0,0,-28,0"
+                    Grid.Row="1">
+                    <materialDesign:TransitioningContent.OpeningEffects>
+                        <materialDesign:TransitionEffect Kind="SlideInFromTop" Duration="0:0:1"/>
+                    </materialDesign:TransitioningContent.OpeningEffects>
+                    <StackPanel
+                    Style="{StaticResource setVisibilityBasedLogin}"
+                    Orientation="Horizontal">
+                        <Image Source="next_page_60px.png" Width="45" Margin="357,0,0,0" MouseLeftButtonDown="Image_MouseLeftButtonDown"
+                               x:Name="imageButt"/>
+                    </StackPanel>
+                </materialDesign:TransitioningContent>
+                <materialDesign:TransitioningContent  Grid.Row="1" Margin="80,20,0,0" HorizontalAlignment="Left">
+                    <materialDesign:TransitioningContent.OpeningEffects>
+                        <materialDesign:TransitionEffect Kind="SlideInFromRight" Duration="0:0:1"></materialDesign:TransitionEffect>
+                    </materialDesign:TransitioningContent.OpeningEffects>
+
+                    <StackPanel
+                Style="{StaticResource setVisibilityBasedLogin}"
+                Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Key" Foreground="{Binding ElementName=passwordBox, Path=BorderBrush}" VerticalAlignment="Center" Margin="0,10,10,10"></materialDesign:PackIcon>
+                        <PasswordBox materialDesign:HintAssist.Hint="Password"
+                             materialDesign:HintAssist.Foreground="Green"
+                             materialDesign:TextFieldAssist.UnderlineBrush="Green"
+                             Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                             Width="140"
+                                 Margin="0,0,0,15"
+                             x:Name="passwordBox"
+                                     PasswordChanged="passwordBox_PasswordChanged"/>
+                    </StackPanel>
+                </materialDesign:TransitioningContent>
+                <materialDesign:TransitioningContent  Grid.Row="3" HorizontalAlignment="Left" Margin="80,35,0,0">
+                    <materialDesign:TransitioningContent.OpeningEffects>
+                        <materialDesign:TransitionEffect Kind="SlideInFromBottom" Duration="0:0:1"></materialDesign:TransitionEffect>
+                    </materialDesign:TransitioningContent.OpeningEffects>
+
+                    <StackPanel 
+                 Style="{StaticResource setVisibilityBasedLogin}"
+                Orientation="Horizontal">
+                        <CheckBox Content="Remember Me"></CheckBox>
+                        <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                        materialDesign:ButtonAssist.CornerRadius="20"
+                        Height="40"
+                        Width="80" Margin="80,0,0,0"
+                         Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                        >Log in</Button>
+                    </StackPanel>
+                </materialDesign:TransitioningContent>
+            </Grid>
+            <TextBlock         
+           FontSize="20"
+          Style="{StaticResource MaterialDesignBody1TextBlock}" Margin="102,22,125,341"><Run Text="Online Pharmacy"/></TextBlock>
+            <TextBlock x:Name="LoginMsg"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Margin="-20,-200,0,0"
+                           FontSize="16">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Text" Value=""/>
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=IsJustStarted, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window},
+                                    UpdateSourceTrigger=PropertyChanged}" Value="False"/>
+                                    <Condition Binding="{Binding Path=IsLogedIn, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window},
+                                    UpdateSourceTrigger=PropertyChanged}" Value="True"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="TextBlock.Text" Value="Succes"/>
+                                <Setter Property="Foreground" Value="Green"/>
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=IsJustStarted, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window},
+                                    UpdateSourceTrigger=PropertyChanged}" Value="False"/>
+                                    <Condition Binding="{Binding Path=IsLogedIn, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window},
+                                    UpdateSourceTrigger=PropertyChanged}" Value="False"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="TextBlock.Text" Value="Wrond Username or Password"/>
+                                <Setter Property="Foreground" Value="Red"/>
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </Grid>
+    </materialDesign:DialogHost>
+</Window>
+        
