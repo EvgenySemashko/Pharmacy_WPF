@@ -18,7 +18,7 @@ namespace Pharmacy
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=DESKTOP-QN31D90;Initial Catalog=PharmacyDB;Integrated Security=True;Pooling=False");
+            optionsBuilder.UseSqlServer("");
         }
     }
 }
