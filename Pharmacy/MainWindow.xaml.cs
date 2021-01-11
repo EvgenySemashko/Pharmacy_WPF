@@ -27,6 +27,7 @@ namespace Pharmacy
         private bool isLogedIn = false;
         private bool isJustStarted = true;
         private bool isPassword = false;
+        User user;
 
         public event PropertyChangedEventHandler PropertyChanged;
         public bool IsLogedIn
@@ -59,6 +60,8 @@ namespace Pharmacy
         public MainWindow()
         {
             InitializeComponent();
+            user = new User();
+            this.DataContext = user;
         }
 
         private Task<bool> validCreds()
@@ -74,6 +77,32 @@ namespace Pharmacy
                 tcs.SetResult(false);
             }
 
+            return tcs.Task;
+        }
+
+        private Task<bool> UserIsExist()
+        {
+            TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
+            bool res = false;
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                var checkUsers = db.Users.ToList();
+
+                foreach (User user in checkUsers)
+                {
+                    if (user.UserName == NameTextBox.Text && user.Password == passwordBox.Password)
+                    {
+                        res = true;
+                        break;
+                    }
+                    else
+                    {
+                        res = false;
+                    }
+                }
+            }
+
+            tcs.SetResult(res);
             return tcs.Task;
         }
 
@@ -128,23 +157,28 @@ namespace Pharmacy
                 isPassword = true;
             }
         }
-        // и так же вызвали второй обработчик для DialogOpened и в итоге мы получаем такое исключение
+       
         private async void openLB(object sender, MaterialDesignThemes.Wpf.DialogOpenedEventArgs eventArgs)
         {
             await Task.Delay(2000);
 
             IsLogedIn = await validCreds();
+            IsLogedIn = await UserIsExist();
 
             if (IsLogedIn)
             {
                 eventArgs.Session.Close();
+
             }
             else
             {
-                eventArgs.Session.Close(false);
+                if (!eventArgs.Session.IsEnded)
+                {
+                    eventArgs.Session.Close(false);
+                }
             }
         }
-        // вызвали второй метод для события DialogClosing
+        
         private void closingLB(object sender, MaterialDesignThemes.Wpf.DialogClosingEventArgs eventArgs)
         {
             if (eventArgs.Parameter != null)
@@ -152,17 +186,16 @@ namespace Pharmacy
                 if (((bool)eventArgs.Parameter) == true)
                 {
                     IsJustStarted = false;
-                    // Sign up succes
+                    // Log in succes
                     IsLogedIn = true;
                 }
                 else if (((bool)eventArgs.Parameter) == false)
                 {
                     IsJustStarted = false;
-                    // Sign up failed
+                    // Log In failed
                     IsLogedIn = false;
                 }
             }
-
         }
     }
 }

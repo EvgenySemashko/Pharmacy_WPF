@@ -17,38 +17,21 @@
      WindowStartupLocation="CenterScreen"
      MouseLeftButtonDown="dragMe"
      Title="Log in window" Height="390" Width="760" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize">
-    <materialDesign:DialogHost DialogOpened="openLB" DialogClosing="closingLB">
+    <materialDesign:DialogHost DialogClosing="closingLB">
         <materialDesign:DialogHost.DialogContent>
             <Grid Margin="10">
-                <Grid.Resources>
-                    <Style x:Key="setVisibilityBasedLogin" TargetType="StackPanel">
-                        <Setter Property="Visibility" Value="Visible"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Path=IsLogedIn, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window},
-                                    UpdateSourceTrigger=PropertyChanged}" Value="True">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Grid.Resources>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <ProgressBar Margin="10" Style="{StaticResource MaterialDesignCircularProgressBar}" IsIndeterminate="True" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Style="{StaticResource MaterialDesignRaisedButton}" Content="Cancel" Grid.Row="2" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Center"/>
+                <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Style="{StaticResource MaterialDesignRaisedButton}" Content="Cancel" Grid.Row="2" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Center" materialDesign:DialogHost.DialogClosingAttached="closingLB"/>
                 <TextBlock Margin="10" Text="Logining up ..." Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
         </materialDesign:DialogHost.DialogContent>
 
         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="GridFirst">
-            <Grid.Resources>
-                <Style x:Key="setVisibilityBasedLogin" TargetType="StackPanel">
-                    <Setter Property="Visibility" Value="Visible"></Setter>
-                </Style>
-            </Grid.Resources>
-
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -88,20 +71,20 @@
                     </materialDesign:TransitioningContent.OpeningEffects>
 
                     <StackPanel 
-                Style="{StaticResource setVisibilityBasedLogin}"
                 Orientation="Horizontal" >
                         <materialDesign:PackIcon Kind="Account" Foreground="{Binding BorderBrush, ElementName=NameTextBox}" Margin="0,35,10,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                         <TextBox
                     x:Name="NameTextBox"
                     materialDesign:HintAssist.Hint="Username"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Width="140" Margin="0,16,0,-2"
-                    >
-                            <Binding Path="Username" UpdateSourceTrigger="PropertyChanged">
-                                <Binding.ValidationRules>
-                                    <rules:NotEmptyValidationRule ValidatesOnTargetUpdated="False"/>
-                                </Binding.ValidationRules>
-                            </Binding>
+                    Width="140" Margin="0,16,0,-2">
+                            <TextBox.Text>
+                                <Binding Path="UserName" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <rules:NotEmptyValidationRule ValidatesOnTargetUpdated="False"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
                         </TextBox>
                     </StackPanel>
                 </materialDesign:TransitioningContent>
@@ -112,7 +95,6 @@
                         <materialDesign:TransitionEffect Kind="SlideInFromTop" Duration="0:0:1"/>
                     </materialDesign:TransitioningContent.OpeningEffects>
                     <StackPanel
-                    Style="{StaticResource setVisibilityBasedLogin}"
                     Orientation="Horizontal">
                         <Image Source="next_page_60px.png" Width="45" Margin="357,0,0,0" MouseLeftButtonDown="Image_MouseLeftButtonDown"
                                x:Name="imageButt"/>
@@ -124,7 +106,6 @@
                     </materialDesign:TransitioningContent.OpeningEffects>
 
                     <StackPanel
-                Style="{StaticResource setVisibilityBasedLogin}"
                 Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Key" Foreground="{Binding ElementName=passwordBox, Path=BorderBrush}" VerticalAlignment="Center" Margin="0,10,10,10"></materialDesign:PackIcon>
                         <PasswordBox materialDesign:HintAssist.Hint="Password"
@@ -143,7 +124,6 @@
                     </materialDesign:TransitioningContent.OpeningEffects>
 
                     <StackPanel 
-                 Style="{StaticResource setVisibilityBasedLogin}"
                 Orientation="Horizontal">
                         <CheckBox Content="Remember Me"></CheckBox>
                         <Button Style="{StaticResource MaterialDesignRaisedButton}"
@@ -151,6 +131,7 @@
                         Height="40"
                         Width="80" Margin="80,0,0,0"
                          Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                materialDesign:DialogHost.DialogOpenedAttached="openLB"
                         >Log in</Button>
                     </StackPanel>
                 </materialDesign:TransitioningContent>
@@ -187,7 +168,7 @@
                                     <Condition Binding="{Binding Path=IsLogedIn, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window},
                                     UpdateSourceTrigger=PropertyChanged}" Value="False"/>
                                 </MultiDataTrigger.Conditions>
-                                <Setter Property="TextBlock.Text" Value="Wrond Username or Password"/>
+                                <Setter Property="TextBlock.Text" Value="Wrong Username or Password"/>
                                 <Setter Property="Foreground" Value="Red"/>
                                 <Setter Property="Visibility" Value="Visible"/>
                             </MultiDataTrigger>

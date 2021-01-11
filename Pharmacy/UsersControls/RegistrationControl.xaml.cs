@@ -87,21 +87,24 @@ namespace Pharmacy
             {
                 eventArgs.Session.Close();
 
-                //using (ApplicationContext db = new ApplicationContext())
-                //{
-                //    User userRegistration = new User();
-                //    userRegistration.UserName = UserName.Text;
-                //    userRegistration.Email = email.Text;
-                //    userRegistration.NumberPhone = numberPhone.Text;
-                //    userRegistration.Password = passwordBox.Password;
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    User userRegistration = new User();
+                    userRegistration.UserName = UserName.Text;
+                    userRegistration.Email = email.Text;
+                    userRegistration.NumberPhone = numberPhone.Text;
+                    userRegistration.Password = passwordBox.Password;
 
-                //    await db.Users.AddAsync(userRegistration);
-                //    await db.SaveChangesAsync();
-                //}
+                    await db.Users.AddAsync(userRegistration);
+                    await db.SaveChangesAsync();
+                }
             }
             else
             {
-                eventArgs.Session.Close(false);
+                if (!eventArgs.Session.IsEnded)
+                {
+                    eventArgs.Session.Close(false);
+                }
             }
         }
         

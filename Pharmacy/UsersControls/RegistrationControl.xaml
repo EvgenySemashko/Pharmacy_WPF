@@ -15,7 +15,7 @@
      TextOptions.TextRenderingMode="Auto"
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}">
-     <materialDesign:DialogHost DialogOpened="openCB" DialogClosing="closingCB">
+     <materialDesign:DialogHost DialogClosing="closingCB">
         <materialDesign:DialogHost.DialogContent>
             <Grid Margin="15">
                 <Grid.RowDefinitions>
@@ -24,7 +24,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <ProgressBar Margin="10" Style="{StaticResource MaterialDesignCircularProgressBar}" IsIndeterminate="True" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Style="{StaticResource MaterialDesignRaisedButton}" Content="Cancel" Grid.Row="2" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Center"/>
+                <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Style="{StaticResource MaterialDesignRaisedButton}" Content="Cancel" Grid.Row="2" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Center" materialDesign:DialogHost.DialogClosingAttached="closingCB"/>
                 <TextBlock Margin="10" Text="Signing up ..." Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
         </materialDesign:DialogHost.DialogContent>
@@ -209,7 +209,8 @@
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Height="Auto"
                     Width="87" Content="Sign Up" Margin="285,10,0,23"
-                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"/>
+                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                        materialDesign:DialogHost.DialogOpenedAttached="openCB"/>
             </StackPanel>
         </Grid>
     </materialDesign:TransitioningContent>
