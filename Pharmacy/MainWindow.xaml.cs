@@ -168,7 +168,9 @@ namespace Pharmacy
             if (IsLogedIn)
             {
                 eventArgs.Session.Close();
-
+                MainBoard board = new MainBoard(NameTextBox.Text);
+                this.Hide();
+                board.Show();
             }
             else
             {

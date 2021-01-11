@@ -69,7 +69,6 @@
                     <materialDesign:TransitioningContent.OpeningEffects>
                         <materialDesign:TransitionEffect Kind="SlideInFromLeft" Duration="0:0:1"></materialDesign:TransitionEffect>
                     </materialDesign:TransitioningContent.OpeningEffects>
-
                     <StackPanel 
                 Orientation="Horizontal" >
                         <materialDesign:PackIcon Kind="Account" Foreground="{Binding BorderBrush, ElementName=NameTextBox}" Margin="0,35,10,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>

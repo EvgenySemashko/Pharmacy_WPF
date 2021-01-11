@@ -65,7 +65,7 @@ namespace Pharmacy
         {
            
             TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
-            if (NotEmptyValidationRule.IsValidName && IsPhoneNumber.IsValidPhone && IsEmail.IsValidEmail && !string.IsNullOrWhiteSpace(passwordBox.Password) && passwordBox.Password == repeatPassword.Password)
+            if (NotEmptyValidationRule.IsValidName && IsPhoneNumber.IsValidPhone && IsEmail.IsValidEmail && isPassword)
             {
                 tcs.SetResult(true);
             }

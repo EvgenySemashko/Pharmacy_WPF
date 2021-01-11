@@ -196,6 +196,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="dataBase\ApplicationContext.cs" />
+    <Compile Include="UsersControls\TopBarControl.xaml.cs">
+      <DependentUpon>TopBarControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MainBoard.xaml.cs">
+      <DependentUpon>MainBoard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ValidationRules\IsEmail.cs" />
     <Compile Include="ValidationRules\IsPhoneNumber.cs" />
     <Compile Include="ValidationRules\NotEmptyValidationRule.cs" />
@@ -203,6 +209,14 @@
     <Compile Include="UsersControls\RegistrationControl.xaml.cs">
       <DependentUpon>RegistrationControl.xaml</DependentUpon>
     </Compile>
+    <Page Include="UsersControls\TopBarControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\MainBoard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -249,7 +263,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />
-    <Folder Include="Windows\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="medical-5459633_1280.png" />
