@@ -196,6 +196,22 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="dataBase\ApplicationContext.cs" />
+    <Compile Include="dataBase\Medicine.cs" />
+    <Compile Include="dataBase\MedicineContext.cs" />
+    <Compile Include="Migrations\20210112083717_MedicineTable.cs" />
+    <Compile Include="Migrations\20210112083717_MedicineTable.designer.cs">
+      <DependentUpon>20210112083717_MedicineTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20210112111334_AddedRights.cs" />
+    <Compile Include="Migrations\20210112111334_AddedRights.designer.cs">
+      <DependentUpon>20210112111334_AddedRights.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\ApplicationContextModelSnapshot.cs" />
+    <Compile Include="Migrations\Medicine\20210112111648_k.cs" />
+    <Compile Include="Migrations\Medicine\20210112111648_k.designer.cs">
+      <DependentUpon>20210112111648_k.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Medicine\MedicineContextModelSnapshot.cs" />
     <Compile Include="UsersControls\TopBarControl.xaml.cs">
       <DependentUpon>TopBarControl.xaml</DependentUpon>
     </Compile>

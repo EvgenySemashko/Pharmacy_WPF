@@ -24,7 +24,17 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        
+
         <local:TopBarControl x:Name="topBarControl" Grid.Row="0" Margin="0,-90,0,0"/>
+
+        <ListView x:Name="listView" Grid.RowSpan="3" Margin="0,60,0,0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" Width="350" DisplayMemberBinding="{Binding UserName}"/>
+                    <GridViewColumn Header="Location" Width="300" DisplayMemberBinding="{Binding ID}"/>
+                    <GridViewColumn Header="Price" Width="95" DisplayMemberBinding="{Binding Email}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

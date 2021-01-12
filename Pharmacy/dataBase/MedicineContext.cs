@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-
 namespace Pharmacy
 {
-    class ApplicationContext : DbContext
+    class MedicineContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
-        public ApplicationContext()
+        public DbSet<Medicine> Medicines { get; set; }
+        public MedicineContext()
         {
             Database.EnsureCreated();
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 namespace Pharmacy
 {
     class User
@@ -13,6 +13,7 @@ namespace Pharmacy
         public string Email { get; set; }
         public string NumberPhone { get; set; }
         public string Password { get; set; }
+        public bool IsAdmin { get; set; } = false;
     }
 }
 

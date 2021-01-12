@@ -24,8 +24,12 @@ namespace Pharmacy
         {
             InitializeComponent();
             this.userName = userName;
-          
             topBarControl.nameTextBlock.Text = userName;
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                var lst = db.Users.ToList();
+                listView.ItemsSource = lst;
+            }
         }
 
         public string UserName { get => userName; private set => userName = value; }
