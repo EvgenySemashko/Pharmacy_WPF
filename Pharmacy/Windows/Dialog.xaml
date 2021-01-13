@@ -1,0 +1,69 @@
+﻿<Window x:Class="Pharmacy.Dialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:Pharmacy"
+        mc:Ignorable="d"
+         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     FontFamily="{DynamicResource MaterialDesignFont}"
+        Background="Transparent"
+        Title="Dialog" Height="200" Width="200"
+        WindowStyle="None" WindowStartupLocation="CenterScreen" AllowsTransparency="True">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <Border CornerRadius="15" Grid.RowSpan="4">
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="White" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock x:Name="SelectedProd" Margin="0,17,0,0"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1">
+            <TextBox x:Name="countBox"
+                    materialDesign:HintAssist.Hint="Count"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Width="140" TextChanged="countBox_TextChanged" PreviewTextInput="countBox_PreviewTextInput">
+            </TextBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2">
+            <TextBox
+                x:Name="PriceMed"
+                IsReadOnly="True"
+                    materialDesign:HintAssist.Hint="Total price"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Width="140">
+            </TextBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Margin="0,6,0,0">
+            <Button x:Name="acceptButton" 
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                        materialDesign:ButtonAssist.CornerRadius="20"
+                        Height="40"
+                        Width="80"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Content="Accept"
+                    Click="acceptButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -22,6 +22,7 @@ namespace Pharmacy
     /// </summary>
     public partial class MainBoard : Window, INotifyPropertyChanged
     {
+        Medicine med;
         private bool userRights;
         private List<Medicine> items = new List<Medicine>();
 
@@ -50,6 +51,11 @@ namespace Pharmacy
             InitializeComponent();
             this.userRights = userRights;
             nameTextBlock.Text = userName;
+            using (MedicineContext db = new MedicineContext())
+            {
+                 items = db.Medicines.ToList();
+            }
+            productsView.ItemsSource = items;
         }
         private void dragMe(object sender, MouseButtonEventArgs e)
         {
@@ -63,9 +69,23 @@ namespace Pharmacy
             }
         }
 
-        private void searchBar_TextChanged(object sender, TextChangedEventArgs e)
+        private void searchBar_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.Key == Key.Enter)
+            {
+                for (int i = 0; i < items.Count; i++)
+                    if (items[i].Name_Medicine == searchBar.Text)
+                        (productsView.ItemContainerGenerator.ContainerFromIndex(i) as DataGridRow).Background = Brushes.Aqua;
+            }
+        }
 
+        private void productsView_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            med = items[productsView.SelectedIndex];
+            
+            Dialog dialog = new Dialog(med);
+
+            dialog.ShowDialog();
         }
     }
 }

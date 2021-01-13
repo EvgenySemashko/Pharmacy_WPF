@@ -198,6 +198,9 @@
     <Compile Include="dataBase\ApplicationContext.cs" />
     <Compile Include="dataBase\Medicine.cs" />
     <Compile Include="dataBase\MedicineContext.cs" />
+    <Compile Include="Windows\Dialog.xaml.cs">
+      <DependentUpon>Dialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\20210112083717_MedicineTable.cs" />
     <Compile Include="Migrations\20210112083717_MedicineTable.designer.cs">
       <DependentUpon>20210112083717_MedicineTable.cs</DependentUpon>
@@ -238,6 +241,10 @@
     <Compile Include="UsersControls\RegistrationControl.xaml.cs">
       <DependentUpon>RegistrationControl.xaml</DependentUpon>
     </Compile>
+    <Page Include="Windows\Dialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\MainBoard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

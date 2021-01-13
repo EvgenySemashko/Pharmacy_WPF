@@ -22,6 +22,7 @@ namespace Pharmacy
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
+    /// TODO: Re-write all functional in Interfaces
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private bool isLogedIn = false;
