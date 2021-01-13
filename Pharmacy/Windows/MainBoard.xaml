@@ -20,21 +20,105 @@
         AllowsTransparency="True" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="60"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <local:TopBarControl x:Name="topBarControl" Grid.Row="0" Margin="0,-90,0,0"/>
+            <DataGrid AutoGenerateColumns="False" Grid.Row="1" x:Name="productsView"
+                      IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Name_Medicine}" Header="Title" Width="220"/>
+                    <DataGridTextColumn Binding="{Binding Count_Medicine}" Header="Count" Width="225"/>
+                    <DataGridTextColumn Binding="{Binding Location}" Header="Location" Width="260"/>
+                    <DataGridTextColumn Binding="{Binding Price_Medicine}" Header="Цена" Width="70"/>
+            </DataGrid.Columns>
+            </DataGrid>
+            <Grid Background="#FF673AB7" Grid.Row="0" Height="60" Width="800" Margin="0">
 
-        <ListView x:Name="listView" Grid.RowSpan="3" Margin="0,60,0,0">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Name" Width="350" DisplayMemberBinding="{Binding UserName}"/>
-                    <GridViewColumn Header="Location" Width="300" DisplayMemberBinding="{Binding ID}"/>
-                    <GridViewColumn Header="Price" Width="95" DisplayMemberBinding="{Binding Email}"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="30"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Foreground="White" Grid.Column="1">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Text" Value="Online Pharmacy"/>
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Path=UserRights, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window},
+                                    UpdateSourceTrigger=PropertyChanged}" Value="True"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="TextBlock.Text" Value="Admin Rights"/>
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+
+        </StackPanel>
+        <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <materialDesign:ColorZone
+        Mode="Standard"
+        Padding="8 -4 8 -4"
+        CornerRadius="2"
+        Panel.ZIndex="1"
+        Margin="16 0 0 0"
+        materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+              Width="Auto" />
+                        <ColumnDefinition
+              Width="*" />
+                        <ColumnDefinition
+              Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Button
+            Style="{DynamicResource MaterialDesignToolButton}">
+                        <materialDesign:PackIcon
+                        Foreground="Black"
+              Kind="Magnify"
+              Opacity=".56" />
+                    </Button>
+                    <TextBox x:Name="searchBar"
+            Grid.Column="1"
+            Margin="8 0 0 0"
+            materialDesign:HintAssist.Hint="Type name of medicine"
+            materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+            BorderThickness="0"
+            MinWidth="200"
+            VerticalAlignment="Center" TextChanged="searchBar_TextChanged" />
+                </Grid>
+            </materialDesign:ColorZone>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="90,0,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="nameTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Grid.Column="1" Margin="5,0,0,0"/>
+                <materialDesign:PackIcon Kind="Account" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0"/>
+            </Grid>
+        </StackPanel>
+
+        <StackPanel Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <materialDesign:PackIcon Kind="ExitToApp" Foreground="White"/>
+        </StackPanel>
+    </Grid>
     </Grid>
 </Window>

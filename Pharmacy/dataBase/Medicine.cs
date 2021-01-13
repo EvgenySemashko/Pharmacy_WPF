@@ -14,6 +14,6 @@ namespace Pharmacy
         public string Name_Medicine { get; set; }
         public decimal Price_Medicine { get; set; }
         public int Count_Medicine { get; set; }
-
+        public string Location { get; set; }
     }
 }

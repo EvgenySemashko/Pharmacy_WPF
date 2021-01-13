@@ -11,29 +11,46 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows.Controls.Primitives;
 
 namespace Pharmacy
 {
     /// <summary>
     /// Логика взаимодействия для MainBoard.xaml
     /// </summary>
-    public partial class MainBoard : Window
+    public partial class MainBoard : Window, INotifyPropertyChanged
     {
-        private string userName;
-        public MainBoard(string userName)
+        private bool userRights;
+        private List<Medicine> items = new List<Medicine>();
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public bool UserRights
         {
-            InitializeComponent();
-            this.userName = userName;
-            topBarControl.nameTextBlock.Text = userName;
-            using (ApplicationContext db = new ApplicationContext())
+            get => userRights;
+            set
             {
-                var lst = db.Users.ToList();
-                listView.ItemsSource = lst;
+                userRights = value;
+                NotifyPropertChanged();
             }
         }
 
-        public string UserName { get => userName; private set => userName = value; }
+        private void NotifyPropertChanged([CallerMemberName] String propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
 
+        public MainBoard(string userName, bool userRights)
+        {
+            InitializeComponent();
+            this.userRights = userRights;
+            nameTextBlock.Text = userName;
+        }
         private void dragMe(object sender, MouseButtonEventArgs e)
         {
             try
@@ -44,6 +61,11 @@ namespace Pharmacy
             {
                 //throw;
             }
+        }
+
+        private void searchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

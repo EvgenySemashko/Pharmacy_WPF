@@ -80,10 +80,13 @@ namespace Pharmacy
             return tcs.Task;
         }
 
-        private Task<bool> UserIsExist()
+        private Task<bool> UserIsExist(out bool userRights)
         {
-            TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
             bool res = false;
+            userRights = false;
+
+            TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
+     
             using (ApplicationContext db = new ApplicationContext())
             {
                 var checkUsers = db.Users.ToList();
@@ -92,11 +95,12 @@ namespace Pharmacy
                 {
                     if (user.UserName == NameTextBox.Text && user.Password == passwordBox.Password)
                     {
+                        userRights = user.IsAdmin;
                         res = true;
                         break;
                     }
                     else
-                    {
+                    { 
                         res = false;
                     }
                 }
@@ -161,14 +165,15 @@ namespace Pharmacy
         private async void openLB(object sender, MaterialDesignThemes.Wpf.DialogOpenedEventArgs eventArgs)
         {
             await Task.Delay(2000);
+            bool isAdmin = false;
 
             IsLogedIn = await validCreds();
-            IsLogedIn = await UserIsExist();
+            IsLogedIn = await UserIsExist(out isAdmin);
 
             if (IsLogedIn)
             {
                 eventArgs.Session.Close();
-                MainBoard board = new MainBoard(NameTextBox.Text);
+                MainBoard board = new MainBoard(NameTextBox.Text, isAdmin);
                 this.Hide();
                 board.Show();
             }

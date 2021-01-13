@@ -206,15 +206,28 @@
     <Compile Include="Migrations\20210112111334_AddedRights.designer.cs">
       <DependentUpon>20210112111334_AddedRights.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20210112122913_Test.cs" />
+    <Compile Include="Migrations\20210112122913_Test.designer.cs">
+      <DependentUpon>20210112122913_Test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20210112123218_Test1.cs" />
+    <Compile Include="Migrations\20210112123218_Test1.designer.cs">
+      <DependentUpon>20210112123218_Test1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20210112123327_Test2.cs" />
+    <Compile Include="Migrations\20210112123327_Test2.designer.cs">
+      <DependentUpon>20210112123327_Test2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ApplicationContextModelSnapshot.cs" />
     <Compile Include="Migrations\Medicine\20210112111648_k.cs" />
     <Compile Include="Migrations\Medicine\20210112111648_k.designer.cs">
       <DependentUpon>20210112111648_k.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Medicine\MedicineContextModelSnapshot.cs" />
-    <Compile Include="UsersControls\TopBarControl.xaml.cs">
-      <DependentUpon>TopBarControl.xaml</DependentUpon>
+    <Compile Include="Migrations\Medicine\20210112113213_UpdatedMedicine.cs" />
+    <Compile Include="Migrations\Medicine\20210112113213_UpdatedMedicine.designer.cs">
+      <DependentUpon>20210112113213_UpdatedMedicine.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Medicine\MedicineContextModelSnapshot.cs" />
     <Compile Include="Windows\MainBoard.xaml.cs">
       <DependentUpon>MainBoard.xaml</DependentUpon>
     </Compile>
@@ -225,10 +238,6 @@
     <Compile Include="UsersControls\RegistrationControl.xaml.cs">
       <DependentUpon>RegistrationControl.xaml</DependentUpon>
     </Compile>
-    <Page Include="UsersControls\TopBarControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Windows\MainBoard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
