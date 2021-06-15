@@ -57,7 +57,7 @@ namespace Pharmacy
             {
                 tempMed.Count_Medicine -= inpCount;
 
-                using (MedicineContext db = new MedicineContext())
+                using (ApplicationContext db = new ApplicationContext())
                 {
                     var tempList = db.Medicines.ToList();
 

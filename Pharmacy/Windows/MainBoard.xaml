@@ -15,7 +15,7 @@
      FontFamily="{DynamicResource MaterialDesignFont}"
      WindowStartupLocation="CenterScreen"
         MouseLeftButtonDown="dragMe"
-        Title="MainBoard" Height="450" Width="500"
+        Title="MainBoard" Height="450" Width="600"
         WindowStyle="None"
         AllowsTransparency="True" ResizeMode="NoResize">
     <Grid>
@@ -33,7 +33,7 @@
                 <DataGridTextColumn Binding="{Binding Price_Medicine}" Header="Price $" Width="80"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Grid Background="#FF673AB7" Grid.Row="0" Height="50" Width="500" Margin="0,-10,0,0">
+        <Grid Background="#FF673AB7" Grid.Row="0" Height="50" Width="600" Margin="0,-10,0,0">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

@@ -50,13 +50,30 @@ namespace Pharmacy
         {
             InitializeComponent();
             this.userRights = userRights;
+            if (userRights)
+            {
+                AdminView adminView = new AdminView();
+                adminView.Show();
+                this.Hide();
+
+                adminView.Closed += AdminView_Closed;
+            }
             nameTextBlock.Text = userName;
-            using (MedicineContext db = new MedicineContext())
+            using (ApplicationContext db = new ApplicationContext())
             {
                  items = db.Medicines.ToList();
             }
             productsView.ItemsSource = items;
         }
+
+        private void AdminView_Closed(object sender, EventArgs e)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                productsView.ItemsSource = db.Medicines.ToList();
+            }
+        }
+
         private void dragMe(object sender, MouseButtonEventArgs e)
         {
             try
